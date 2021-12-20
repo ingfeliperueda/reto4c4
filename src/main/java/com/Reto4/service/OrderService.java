@@ -68,20 +68,20 @@ public class OrderService {
         return aBoolean;
     }
 
-    public List<Order> findByZone(String zona) {
-        return orderRepository.findByZone(zona);
+    public List<Order> getfindByZone(String zona) {
+        return orderRepository.getindByZone(zona);
     }
     
     //Reto4
-    public List<Order> ordersSalesManByID(Integer id){
-        return orderRepository.ordersSalesManByID(id);
+    public List<Order> getordersSalesManByID(Integer id){
+        return orderRepository.getordersSalesManByID(id);
     }
     
-    public List<Order> ordersSalesManByState(String state, Integer id){
-        return orderRepository.ordersSalesManByState(state, id);
+    public List<Order> getordersSalesManByState(String state, Integer id){
+        return orderRepository.getordersSalesManByState(state, id);
     }
     
-    public List<Order> ordersSalesManByDate(String dateStr, Integer id){
-        return orderRepository.ordersSalesManByDate(dateStr, id);
+    public List<Order> getordersSalesManByDate(String dateStr, Integer id){
+        return orderRepository.getordersSalesManByDate(dateStr, id);
     }
 }
