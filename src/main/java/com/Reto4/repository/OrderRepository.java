@@ -3,6 +3,8 @@ package com.Reto4.repository;
 
 import com.Reto4.model.Order;
 import com.Reto4.repository.crud.OrderCrudRepository;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -111,15 +113,8 @@ public class OrderRepository {
     * @paramid
     * @return 
     */
-    public List<Order> getordersSalesManByState(String state, Integer id){
-        Query query = new Query() {};
-        
-        Criteria criterio = Criteria.where("salesMan.id").is(id).and("status").is(state);
-        query.addCriteria(criterio);
-        
-        List<Order> orders = mongoTemplate.find(query, Order.class);
-        
-        return orders;
+    public List<Order> getBySalesManIdAndStates(String state, Integer id){
+        return orderCrudRepository.findBySalesManIdAndStates(state, id);
     }
     
     /**
@@ -129,18 +124,11 @@ public class OrderRepository {
      * @return 
     */
     public List<Order> getordersSalesManByDate(String dateStr, Integer id){
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    
-        Query query = new Query() {};
-        
-        Criteria criterio = Criteria.where("registerDay").
-                gte(LocalDate.parse(dateStr, dtf).minusDays(1).atStartOfDay())
-                .lt(LocalDate.parse(dateStr,dtf).plusDays(1).atStartOfDay())
-                .and("salesMan.id)").is(id);
-        query.addCriteria(criterio);
-        
-        List<Order> orders = mongoTemplate.find(query, Order.class);
-        
-        return orders;
+        try {
+            return orderCrudRepository.findByordersSalesManByDate(new SimpleDateFormat("yyyy-MM-dd").parse(dateStr), id);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

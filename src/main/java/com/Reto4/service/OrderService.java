@@ -77,8 +77,8 @@ public class OrderService {
         return orderRepository.getordersSalesManByID(id);
     }
     
-    public List<Order> getordersSalesManByState(String state, Integer id){
-        return orderRepository.getordersSalesManByState(state, id);
+    public List<Order> getBySalesManIdAndStates(String state, Integer id){
+        return orderRepository.getBySalesManIdAndStates(state, id);
     }
     
     public List<Order> getordersSalesManByDate(String dateStr, Integer id){

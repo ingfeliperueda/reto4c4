@@ -2,6 +2,7 @@ package com.Reto4.repository.crud;
 
 
 import com.Reto4.model.Order;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -20,4 +21,10 @@ public interface OrderCrudRepository extends MongoRepository<Order, Integer> {
     
     //Para seleccionar la orden con el id maximo
     Optional<Order> findTopByOrderByIdDesc();
+    
+    List<Order> findBySalesManIdAndStates(String state, Integer id);
+    
+    List<Order> findByordersSalesManByDate(Date dateStr, Integer id);
+    
+    List<Order> findBySalesManId(Integer id);
 }
